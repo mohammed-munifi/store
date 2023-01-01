@@ -21,8 +21,8 @@ return new class extends Migration
             $table->id();
             //'name' VARCHAR(255) NOT NULL
             $table->string('name');
-            //'image_path' VARCHAR(500) NOT NULL
-            $table->string('image_path',500);
+            //'image_path' VARCHAR(500)  NULL
+            $table->string('image_path',500)->nullable();
             //'parent_id' BIGINT UNSIGNED NULL
             $table->unsignedBigInteger('parent_id')->nullable();
             //'slug' VARCHAR(250) NOT NULL + UNIQUE INDEXES
