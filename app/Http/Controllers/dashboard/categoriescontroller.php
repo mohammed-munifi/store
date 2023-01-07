@@ -20,9 +20,31 @@ class categoriescontroller extends Controller
 
         return view('dashboard.categories.index',[
 
-            'categories'=>$categories,
+            'categories'=>$categories, //لتمرير الداتا الى الفيو
+            'status'=>session('status'), // استداعاء قيمة ستايتس من السيشين
         ]);
     }
+    public function create(){
+
+        return view('dashboard.categories.create');
+    }
+    public function store(Request $request)
+    {
+        // dd($request->post());  //var_dump()
+        DB::table('categories')->insert([
+            //استدراج الداتا من السيدر عن طريق الريكوست دون تعريف ملف فيو
+
+            'name' => $request->post('name'),
+            'slug' => $request->post('slug'),
+            'parent_id' => $request->post('parent_id'),
+            'created_at' => now(),
+
+        ]);
+        //PRG  -POST REDIRECT GET +flash message
+        return redirect()->route('dashboard.categories.index')
+        ->with('status','category created!'); 
+    }
+    
 }
 
 

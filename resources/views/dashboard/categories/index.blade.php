@@ -3,6 +3,19 @@
 @section('content')
 @section('title','categories')
 
+@if($status)
+<div class="alert alert-success">
+    {{$status}}
+</div>
+@endif
+
+<div class="mb-4">
+    <a href="{{route('dashboard.categories.create')}}" class="btn btn-outline-primary">
+        <i class="fas fa-plus"></i>Add New
+    </a>
+
+</div>
+
 <table class="table">
     <thead>
         <tr>

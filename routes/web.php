@@ -30,6 +30,9 @@ use Illuminate\Support\Facades\Route;
    // Route::view('/dashboard','layouts.dashboard');
 
    Route::get('/dashboard/categories',[categoriescontroller::class,'index'])->name('dashboard.categories.index');
+   Route::get('/dashboard/categories/create',[categoriescontroller::class,'create'])->name('dashboard.categories.create');
+   Route::post('/dashboard/categories/store',[categoriescontroller::class,'store'])->name('dashboard.categories.store');
+
     
 
     
