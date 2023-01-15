@@ -24,6 +24,8 @@
             <th>parent ID</th>
             <th>Created AT</th>
             <th>UPDATED AT</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -31,9 +33,11 @@
         <tr>
             <td>{{ $category->id }}</td>
             <td><strong>{{ $category->name }}</strong><br><span class="text-muted">{{ $category->slug }}</span></td>
-            <td>{{ $category->parent_id }}</td>
+            <td>{{ $category->parent_name }}</td>
             <td>{{ $category->created_at }}</td>
             <td>{{ $category->updated_at ?? 'No update'}}</td>
+            <td></td>
+            <td> <a href="{{ route('dashboard.categories.edit',$category->id) }}" class="btn btn-sm btn-outline-primary"> <i class="fas fa-edit"></i> Edit</a></td> 
         </tr>
         @endforeach
     </tbody>
