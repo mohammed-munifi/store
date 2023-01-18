@@ -34,7 +34,12 @@ class categoriescontroller extends Controller
     }
     public function create(){
 
-        return view('dashboard.categories.create');
+        $parents=category::orderBy('name')->get();
+
+        return view('dashboard.categories.create',[
+            'parents'=>$parents,      //البيرنتز الراجعة سيتم تمريرها الى ملف الفيو الكرييت
+        ]);
+        
     }
 
 
@@ -60,12 +65,14 @@ class categoriescontroller extends Controller
     }
 
     public function edit($id){
-        $category =category::findOrfill($id);  //orfill  تقوم نبفس وظيفة abort404
-        
+        $category =category::findOrfail($id);  //orfail  تقوم نبفس وظيفة abort404
+        $parents=category::orderBy('name')->get();
+         
         return view('dashboard.categories.edit',[
 
             'category'=> $category, //لتمرير الداتا الى الفيو
-            
+           
+            'parents'=>$parents,     
         ]);
     }
     
