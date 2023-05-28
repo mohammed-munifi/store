@@ -36,8 +36,14 @@
             <td>{{ $category->parent_name }}</td>
             <td>{{ $category->created_at }}</td>
             <td>{{ $category->updated_at ?? 'No update'}}</td>
-            <td></td>
             <td> <a href="{{ route('dashboard.categories.edit',$category->id) }}" class="btn btn-sm btn-outline-primary"> <i class="fas fa-edit"></i> Edit</a></td> 
+            <td>  <form action="{{route('dashboard.categories.destroy',$category->id)}}" method="post">    <!-- تم استخدام الفورم لانه الديليت بطريقة الديليت والفورم لا يتقبل الا البوست ولقيت -->
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-sm btn-outline-danger ">
+                   <i class="fas fa-trash"></i> Deleted</button>
+                   </form>  
+                   </td>  
         </tr>
         @endforeach
     </tbody>

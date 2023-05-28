@@ -4,14 +4,16 @@
 
 @section('content')
 
-<form action="{{route('dashboard.categories.update',$category->id)}}" method="post">
+<form action="{{route('dashboard.categories.update',$category->id)}}" method="post"> 
 
 
     <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
 
 
     @csrf
-
+    {{--HTML FORM method spoofing--}}           
+    <!-- <input type="hidden" name="_method" value="put">      updateيتم ارسالها بطريقة البوت طبيعة الفورم لا يستقبل الا بوست وقيت -->
+        @method('put')
     <div class="mb-3">
 
         <label for="name" class="form-lable">category Name</label>
@@ -26,7 +28,7 @@
         <select name="parent_id" id="parent_id" class="form-control">
             <option value="">No parent</option>
             @foreach($parents as $parent)
-            <option value="{{$parent->id}}" @if($parent->id == $category->parent_id) selected @endif>{{ $parent->name }} </option>
+            <option value="{{$parent->id}}" @selected($parent->id == $category->parent_id) >{{ $parent->name }} </option> 
             @endforeach
         </select>
         <div class="mb-3">

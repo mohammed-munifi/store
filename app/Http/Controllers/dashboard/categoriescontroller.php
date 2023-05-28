@@ -45,6 +45,13 @@ class categoriescontroller extends Controller
 
     public function store(Request $request)
     {   
+
+        $request->validate([
+            'name'=>'required|string|max:255',                   //ريكوير تعني التزام الحقل بادخال قيمة                              //rolls
+            'slug'=>'string|unique:categories.slug',             //تحديد اليونيك للجدول وكولوم السليق
+            'image'       
+
+        ]);
          // dd($request->post());  //var_dump() 
          
          //Mass Assignment
@@ -74,6 +81,26 @@ class categoriescontroller extends Controller
            
             'parents'=>$parents,     
         ]);
+    }
+
+    public function update(   Request $request , $id){
+        $category =category::findOrfail($id);
+         $category->update($request->all()); //جميع الحقول
+
+         return redirect()->route('dashboard.categories.index')  //redirect this route and flash message
+         ->with('status',"category ({$category->name}) Updated!"); 
+      
+
+    }
+    public function destroy($id){
+        category::destroy($id);                     //طريقة اخرى
+
+     //   $category =category::findOrfail($id);  
+       // $category->delete();
+        
+        return redirect()->route('dashboard.categories.index')  //redirect this route and flash message
+        ->with('status','category Deleted!'); 
+     
     }
     
 }
